@@ -8,11 +8,12 @@ function Footer() {
 
 const styles = {
   footer: {
-    background: "#0a2540",
-    color: "#fff",
-    textAlign: "center",
-    padding: "15px"
-  }
+  background: "#0a2540",
+  color: "#fff",
+  textAlign: "center",
+  padding: "15px",
+  fontSize: "14px"
+}
 };
 
 export default Footer;
