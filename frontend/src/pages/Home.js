@@ -7,7 +7,7 @@ function Home() {
   const [images, setImages] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/projects")
+    axios.get("https://unix-aquatech.onrender.com/api/projects")
       .then(res => {
         const imgs = res.data.filter(item => item.type === "image");
         setImages(imgs.slice(0, 3));

@@ -5,7 +5,7 @@ function Gallery() {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/projects")
+    axios.get("https://unix-aquatech.onrender.com/api/projects")
       .then(res => {
         console.log("DATA:", res.data); // 🔥 DEBUG
         setProjects(res.data);

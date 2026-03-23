@@ -14,14 +14,14 @@ function Upload() {
 
         // 1️⃣ Upload to Cloudinary
         const res = await axios.post(
-          "http://localhost:5000/api/upload",
+          "https://unix-aquatech.onrender.com/api/upload",
           formData
         );
 
         const url = res.data.secure_url;
 
         // 2️⃣ Save each to MongoDB
-        await axios.post("http://localhost:5000/api/projects", {
+        await axios.post("https://unix-aquatech.onrender.com/api/projects", {
           title: files[i].name,
           type: files[i].type.includes("video") ? "video" : "image",
           url: url,
