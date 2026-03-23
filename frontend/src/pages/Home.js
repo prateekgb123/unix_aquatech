@@ -237,7 +237,7 @@ const styles = {
 
 contactCard: {
   maxWidth: "500px",
-  width: "90%",          // ✅ reduce width on mobile
+  width: "70%",          // ✅ reduce width on mobile
   margin: "20px auto",   // ✅ adds spacing around
   background: "#fff",
   padding: "20px",
