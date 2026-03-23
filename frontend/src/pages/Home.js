@@ -236,18 +236,17 @@ const styles = {
   },
 
 contactCard: {
-  maxWidth: "500px",
-  width: "70%",          // ✅ reduce width on mobile
-  margin: "20px auto",   // ✅ adds spacing around
+  maxWidth: "380px",   // 🔥 main fix
+  width: "100%",
+  margin: "20px auto",
   background: "#fff",
-  padding: "20px",
+  padding: "18px",
   borderRadius: "12px",
   boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
   textAlign: "left"
 },
-
   input: {
-  width: "100%",
+  width: "90%",
   padding: "12px",
   marginTop: "12px",
   borderRadius: "6px",
@@ -256,7 +255,7 @@ contactCard: {
 },
 
 textarea: {
-  width: "100%",
+  width: "90%",
   padding: "12px",
   marginTop: "12px",
   borderRadius: "6px",
