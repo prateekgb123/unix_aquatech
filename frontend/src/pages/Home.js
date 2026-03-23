@@ -152,6 +152,9 @@ function Home() {
 /* ================= STYLES ================= */
 
 const styles = {
+  p: {
+  marginBottom: "10px"
+},
   container: {
     maxWidth: "1100px",
     margin: "auto",
@@ -166,7 +169,8 @@ const styles = {
   },
 
   section: {
-    padding: "clamp(50px, 8vw, 80px) 0"
+    padding: "60px 15px"
+
   },
 
   sectionLight: {
@@ -231,45 +235,47 @@ const styles = {
     fontSize: "clamp(14px, 2.5vw, 16px)"
   },
 
-  contactCard: {
-    maxWidth: "500px",
-    width: "100%",
-    margin: "auto",
-    background: "#fff",
-    padding: "clamp(15px, 3vw, 25px)",
-    borderRadius: "10px",
-    boxShadow: "0 4px 12px rgba(0,0,0,0.1)"
-  },
+ contactCard: {
+  maxWidth: "500px",
+  width: "100%",
+  margin: "auto",
+  background: "#fff",
+  padding: "20px",
+  borderRadius: "12px",
+  boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+  textAlign: "left"   // 🔥 IMPORTANT FIX
+},
 
   input: {
-    width: "100%",
-    padding: "10px",
-    marginTop: "10px",
-    borderRadius: "5px",
-    border: "1px solid #ccc",
-    fontSize: "14px"
-  },
+  width: "100%",
+  padding: "12px",
+  marginTop: "12px",
+  borderRadius: "6px",
+  border: "1px solid #ccc",
+  fontSize: "14px"
+},
 
-  textarea: {
-    width: "100%",
-    padding: "10px",
-    marginTop: "10px",
-    borderRadius: "5px",
-    border: "1px solid #ccc",
-    minHeight: "100px",
-    fontSize: "14px"
-  },
+textarea: {
+  width: "100%",
+  padding: "12px",
+  marginTop: "12px",
+  borderRadius: "6px",
+  border: "1px solid #ccc",
+  minHeight: "120px",
+  fontSize: "14px"
+},
 
-  button: {
-    marginTop: "15px",
-    padding: "12px",
-    width: "100%",
-    background: "#0a2540",
-    color: "#fff",
-    border: "none",
-    borderRadius: "5px",
-    fontSize: "15px"
-  }
+ button: {
+  marginTop: "15px",
+  padding: "14px",
+  width: "100%",
+  background: "#0a2540",
+  color: "#fff",
+  border: "none",
+  borderRadius: "8px",
+  fontSize: "16px",
+  fontWeight: "500"
+}
 };
 
 export default Home;

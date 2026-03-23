@@ -52,7 +52,14 @@ function Header() {
         {/* ✅ DESKTOP MENU */}
         {!isMobile && (
           <div style={styles.menu}>
-            <span style={styles.link} onClick={() => scrollTo("home")}>Home</span>
+            <span
+              style={styles.mobileLink}
+              onClick={() => scrollTo("home")}
+              onMouseEnter={(e) => e.target.style.background = "rgba(255,255,255,0.1)"}
+              onMouseLeave={(e) => e.target.style.background = "transparent"}
+            >
+              Home
+            </span>
             <span style={styles.link} onClick={() => scrollTo("about")}>About</span>
             <span style={styles.link} onClick={() => scrollTo("gallery")}>Gallery</span>
             <span style={styles.link} onClick={() => scrollTo("contact")}>Contact</span>
@@ -162,31 +169,32 @@ const styles = {
   },
 
   /* 🔥 FULL SCREEN MENU */
-  mobileMenu: {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100vh",
-    background: "linear-gradient(135deg, #0a2540, #123b63)",
-    backdropFilter: "blur(10px)",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: "35px",
-    zIndex: 2000,
-    animation: "slideIn 0.4s ease"
-  },
+ mobileMenu: {
+  position: "fixed",
+  top: 0,
+  left: 0,
+  width: "100%",
+  height: "100vh",
+  background: "linear-gradient(135deg, #0a2540, #123b63)",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  zIndex: 2000,
+  animation: "slideIn 0.4s ease"
+},
 
-  mobileLink: {
-    color: "#fff",
-    fontSize: "26px",
-    fontWeight: "500",
-    letterSpacing: "1px",
-    cursor: "pointer",
-    transition: "0.3s"
-  },
+mobileLink: {
+  color: "#fff",
+  fontSize: "24px",
+  fontWeight: "600",
+  padding: "15px 40px",
+  width: "80%",
+  textAlign: "center",
+  borderBottom: "1px solid rgba(255,255,255,0.2)",
+  cursor: "pointer",
+  transition: "0.3s"
+},
 
   close: {
     position: "absolute",
