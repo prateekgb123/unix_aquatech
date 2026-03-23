@@ -2,13 +2,41 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+import etp from "../assets/etp.jpg";
+import ozone from "../assets/ozonation.jpg";
+import chemical from "../assets/chemical.jpg";
+import consulting from "../assets/consulting.jpg";
+import stp from "../assets/stp.jpg";
+import filtration from "../assets/filtration.jpg";
 function Home() {
+  const services = [
+    { name: "ETP", img: etp },
+    { name: "Ozonation", img: ozone },
+    { name: "Chemical", img: chemical },
+    { name: "Consulting", img: consulting },
+    { name: "STP", img: stp },
+    { name: "Filtration", img: filtration },
+  ];
+
   const [projects, setProjects] = useState([]);
+  const [current, setCurrent] = useState(0);
+
+  const heroImages = [
+    "https://res.cloudinary.com/demo/image/upload/sample.jpg",
+    "https://res.cloudinary.com/demo/image/upload/balloons.jpg",
+    "https://res.cloudinary.com/demo/image/upload/beach.jpg",
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % heroImages.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     axios
-      .get("https://unix-aquatech.onrender.com/api/projects") // ✅ use deployed URL
+      .get("https://unix-aquatech.onrender.com/api/projects")
       .then((res) => {
         if (Array.isArray(res.data)) {
           setProjects(res.data);
@@ -17,83 +45,100 @@ function Home() {
       .catch((err) => console.log(err));
   }, []);
 
+  const scrollToServices = () => {
+    document
+      .getElementById("services")
+      ?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <>
       <Header />
 
       {/* HERO */}
-     <section id="home" style={styles.hero}>
-  <h1 style={{ fontSize: "clamp(24px, 6vw, 42px)" }}>
-    Advanced Water Treatment Solutions
-  </h1>
-  <p style={{ fontSize: "clamp(14px, 3vw, 18px)" }}>
-    Industrial • Commercial • Environmental
-  </p>
-</section>
+      <section id="home">
+        <div>
+          <h1>
+            Transforming Water Into{" "}
+            <span>Sustainable Solutions</span>
+          </h1>
+
+          <p>
+            Advanced treatment systems for industries, ensuring purity,
+            efficiency & environmental safety.
+          </p>
+
+          <button onClick={scrollToServices}>
+            Explore Services →
+          </button>
+        </div>
+
+        <div>
+          <img src={heroImages[current]} alt="hero" />
+        </div>
+      </section>
 
       {/* ABOUT */}
-      <section id="about" style={styles.section}>
-        <div style={styles.container}>
-          <div style={styles.card}>
-            <h1 style={styles.title}>Unix Aquatech Services</h1>
+      <section id="about">
+        <div>
 
-            <p style={styles.text}>
-              Unix Aquatech Services is a Bangalore-based organization dedicated to providing advanced and sustainable water treatment solutions. 
-              We specialize in designing, implementing, and maintaining systems that ensure water purity, safety, and environmental compliance across 
-              industrial and commercial sectors. 
-              
-              Our core services include industrial effluent treatment plants (ETP), water purification and filtration systems, ozonation technology 
-              for pools and process water, and chemical treatment solutions.
-              
-              With a team of experienced engineers and industry professionals, we leverage modern technologies to deliver efficient and reliable outcomes. 
-              We strongly believe in sustainability and environmental responsibility. Our solutions are designed not only to meet regulatory standards 
-              but also to reduce water wastage, improve operational efficiency, and promote eco-friendly practices.
-              
-              At Unix Aquatech Services, customer satisfaction is at the heart of everything we do. We provide end-to-end support—from consultation 
-              and system design to installation and maintenance—ensuring long-term performance and value for our clients.
+          {/* TOP CARD */}
+          <div>
+            <h1>Unix Aquatech Services</h1>
+
+            <p>
+              Unix Aquatech Services is a Bangalore-based water treatment
+              company specializing in advanced industrial and commercial
+              solutions, offering expertise in designing and implementing
+              ETP, STP, filtration, and ozonation systems that ensure
+              efficiency, reliability, and long-term performance while
+              delivering eco-friendly, sustainable, and cost-effective
+              solutions tailored to modern environmental needs.
             </p>
           </div>
 
-          <div style={styles.gridTwo}>
-            <div style={styles.card}>
+          <div style={{ height: "40px" }} />
+
+          {/* GRID */}
+          <div>
+            <div>
               <h2>Who We Are</h2>
               <p>
-                 We are a team of experienced engineers and professionals dedicated to solving complex water treatment challenges using modern technologies. 
-              Our goal is to improve water quality, reduce environmental impact, and ensure compliance with industry standards while delivering cost-effective solutions.
+                A team of experienced engineers focused on solving
+                water treatment challenges using modern technology.
               </p>
             </div>
 
-            <div style={styles.card}>
+            <div>
               <h2>What We Offer</h2>
-              <ul style={styles.list}>
-                 <li>Industrial Effluent Treatment Plants (ETP)</li>
-              <li>Water Purification & Filtration Systems</li>
-              <li>Ozonation Systems for Pools & Water Treatment</li>
-              <li>Chemical Conditioning & Treatment Solutions</li>
-              <li>Environmental Consulting & Compliance Support</li>
+              <ul>
+                <li>Effluent Treatment Plants (ETP)</li>
+                <li>Water Filtration Systems</li>
+                <li>Ozonation Systems</li>
+                <li>Chemical Treatment Solutions</li>
               </ul>
             </div>
           </div>
+
         </div>
       </section>
 
       {/* SERVICES */}
-      <section id="services" style={styles.sectionLight}>
-        <div style={styles.container}>
-          <h2 style={styles.heading}>Our Services</h2>
+      <section id="services">
+        <div>
+          <h2>Our Services</h2>
 
-          <div style={styles.grid}>
-            {[
-              "Industrial Effluent Treatment",
-              "Ozonation Systems",
-              "Chemical Conditioning",
-              "Environmental Consulting",
-              "Water Filtration Systems",
-              "Wastewater Recycling"
-            ].map((s, i) => (
-              <div key={i} style={styles.cardHover}>
-                <h3>{s}</h3>
-                <p>Reliable and efficient solutions.</p>
+          <div>
+            {services.map((s, i) => (
+              <div key={i}>
+                <div>
+                  <img src={s.img} alt={s.name} />
+                </div>
+
+                <div>
+                  <h3>{s.name}</h3>
+                  <p>Reliable solutions</p>
+                </div>
               </div>
             ))}
           </div>
@@ -101,45 +146,38 @@ function Home() {
       </section>
 
       {/* GALLERY */}
-      <section id="gallery" style={styles.section}>
-        <div style={styles.container}>
-          <h2 style={styles.heading}>Our Work</h2>
+      <section id="gallery">
+        <div>
+          <h2>Our Work</h2>
 
-          <div style={styles.grid}>
-            {projects.length === 0 ? (
-              <p>Loading...</p>
-            ) : (
-              projects.map((p, i) => (
-                <div key={i} style={styles.card}>
+          <div>
+            {projects.map((p, i) => (
+              <div key={i}>
+                <div>
                   {p.type === "image" ? (
-                    <img src={p.url} alt="" style={styles.media} />
+                    <img src={p.url} alt="" />
                   ) : (
-                    <video controls style={styles.media}>
+                    <video controls>
                       <source src={p.url} />
                     </video>
                   )}
                 </div>
-              ))
-            )}
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* CONTACT */}
-      <section id="contact" style={styles.sectionLight}>
-        <div style={styles.container}>
-          <h2 style={styles.heading}>Contact Us</h2>
+      <section id="contact">
+        <div>
+          <h2>Contact Us</h2>
 
-          <div style={styles.contactCard}>
-            <p><b>Location:</b> Bangalore, India</p>
-            <p><b>Email:</b> unixaquatech@gmail.com</p>
-            <p><b>Phone:</b> +91 XXXXX XXXXX</p>
-
-            <input placeholder="Your Name" style={styles.input} />
-            <input placeholder="Your Email" style={styles.input} />
-            <textarea placeholder="Message" style={styles.textarea}></textarea>
-
-            <button style={styles.button}>Send Message</button>
+          <div>
+            <input placeholder="Name" />
+            <input placeholder="Email" />
+            <textarea placeholder="Message" />
+            <button>Send</button>
           </div>
         </div>
       </section>
@@ -149,132 +187,283 @@ function Home() {
   );
 }
 
-/* ================= STYLES ================= */
+
+/* 🔥 FINAL STYLES */
 
 const styles = {
-  p: {
-  marginBottom: "10px"
+heroCard: {
+  width: "100%",
+  maxWidth: "800px", // 🔥 increase size
+  margin: "auto",
+  padding: "60px 50px",
+  borderRadius: "24px",
+  textAlign: "center",
+  background: "#ffffff",
+  boxShadow: "0 20px 60px rgba(0,0,0,0.1)"
 },
-  container: {
-    maxWidth: "1100px",
-    margin: "auto",
-    padding: "0 15px",
-    textAlign: "center"
+
+heroTitle: {
+  fontSize: "44px", // 🔥 bigger
+  fontWeight: "800",
+  marginBottom: "25px",
+  color: "#111827"
+},
+
+heroText: {
+  fontSize: "19px", // 🔥 large readable paragraph
+  lineHeight: "2",  // 🔥 airy spacing
+  color: "#4b5563",
+  maxWidth: "800px",
+  margin: "auto"
+},
+centerWrapper: {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  flexDirection: "column"
+},
+  /* 🔥 HERO */
+hero: {
+  display: "flex",
+  flexWrap: "wrap",
+  alignItems: "center",
+  justifyContent: "space-between",
+  padding: "100px 20px",
+  background: "linear-gradient(135deg,#0f2027,#203a43,#2c5364)",
+  color: "#fff",
+  gap: "40px"
+},
+
+  heroLeft: {
+    flex: 1,
+    minWidth: "280px",
+    maxWidth: "550px"
   },
 
-  hero: {
-    padding: "clamp(60px, 10vw, 120px) 20px",
-    background: "linear-gradient(to bottom, #e6f0fa, #cfe3f3)",
-    textAlign: "center"
+  heroRight: {
+    flex: 1,
+    textAlign: "center",
+    minWidth: "280px"
   },
 
+  heroImage: {
+    width: "100%",
+    maxWidth: "380px",
+    borderRadius: "16px",
+    boxShadow: "0 10px 30px rgba(0,0,0,0.3)"
+  },
+
+  heroTitle: {
+    fontSize: "42px",
+    fontWeight: "800",
+    lineHeight: "1.3"
+  },
+
+  heroSub: {
+    marginTop: "15px",
+    fontSize: "16px",
+    lineHeight: "1.6",
+    color: "#d1d5db"
+  },
+
+  cta: {
+    marginTop: "25px",
+    padding: "12px 28px",
+    background: "linear-gradient(90deg,#0072ff,#00c6ff)",
+    color: "#fff",
+    border: "none",
+    borderRadius: "8px",
+    cursor: "pointer",
+    fontWeight: "600",
+    transition: "0.3s"
+  },
+
+  /* SECTION */
   section: {
-    padding: "60px 15px"
-
+    padding: "70px 20px"
   },
 
   sectionLight: {
-    padding: "clamp(50px, 8vw, 80px) 0",
-    background: "#f9f9f9"
+    padding: "70px 20px",
+    background: "#f5f7fa"
   },
 
-  title: {
-    fontSize: "clamp(22px, 4vw, 30px)",
-    marginBottom: "15px"
-  },
-
-  text: {
-    lineHeight: "1.7",
-    fontSize: "clamp(14px, 2.5vw, 16px)"
+  container: {
+    maxWidth: "1100px",
+    margin: "auto"
   },
 
   heading: {
-    marginBottom: "30px",
-    fontSize: "clamp(20px, 4vw, 28px)"
+    marginBottom: "25px",
+    fontSize: "34px",
+    fontWeight: "700",
+    textAlign: "center"
   },
 
-  /* ✅ AUTO RESPONSIVE GRID */
+  /* GRID */
   grid: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-    gap: "20px"
+    gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))",
+    gap: "25px"
   },
 
   gridTwo: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-    gap: "20px",
+    gridTemplateColumns: "repeat(auto-fit,minmax(300px,1fr))",
+    gap: "25px",
     marginTop: "30px"
   },
 
+  /* CARDS */
+  cardGlass: {
+  maxWidth: "750px",
+  margin: "auto",
+  padding: "40px 30px",
+  borderRadius: "20px",
+  textAlign: "center",
+  background: "rgba(255,255,255,0.8)",
+  backdropFilter: "blur(10px)",
+  boxShadow: "0 15px 40px rgba(0,0,0,0.1)"
+},
+
+gridTwo: {
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fit,minmax(300px,1fr))",
+  gap: "30px",
+  alignItems: "stretch"
+},
+
+infoCard: {
+  background: "#fff",
+  padding: "25px",
+  borderRadius: "16px",
+  boxShadow: "0 10px 25px rgba(0,0,0,0.08)",
+  transition: "0.3s"
+},
+
+infoHeading: {
+  marginBottom: "12px",
+  fontSize: "20px",
+  fontWeight: "600",
+  color: "#111827"
+},
+
+infoText: {
+  lineHeight: "1.7",
+  color: "#555"
+},
+
+list: {
+  paddingLeft: "20px",
+  lineHeight: "1.8",
+  color: "#555"
+},
+
+highlight: {
+  color: "#0072ff",
+  fontWeight: "600"
+},
   card: {
     background: "#fff",
-    padding: "clamp(15px, 3vw, 25px)",
-    borderRadius: "10px",
-    boxShadow: "0 4px 12px rgba(0,0,0,0.1)"
+    borderRadius: "16px",
+    padding: "15px",
+    boxShadow: "0 8px 25px rgba(0,0,0,0.08)"
   },
 
-  cardHover: {
-    background: "#fff",
-    padding: "clamp(15px, 3vw, 25px)",
-    borderRadius: "10px",
-    boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-    transition: "0.3s"
+serviceCard: {
+  background: "#fff",
+  borderRadius: "18px",
+  boxShadow: "0 8px 20px rgba(0,0,0,0.08)",
+  transition: "0.3s",
+  cursor: "pointer",
+  overflow: "hidden" // 🔥 fixes overflow
+},
+
+mediaWrapper: {
+  width: "100%",
+  height: "180px",
+  overflow: "hidden"
+},
+
+media: {
+  width: "100%",
+  height: "100%",
+  objectFit: "cover",
+  display: "block"
+},
+  /* INFO */
+  infoCard: {
+    background: "#ffffff",
+    padding: "25px",
+    borderRadius: "16px",
+    boxShadow: "0 8px 25px rgba(0,0,0,0.08)"
   },
 
-  media: {
-    width: "100%",
-    height: "clamp(180px, 30vw, 220px)",
-    objectFit: "cover",
-    borderRadius: "10px"
+  infoHeading: {
+    marginBottom: "10px",
+    fontSize: "20px",
+    fontWeight: "600"
+  },
+
+  infoText: {
+    lineHeight: "1.7",
+    color: "#555"
   },
 
   list: {
-    textAlign: "left",
     paddingLeft: "20px",
-    fontSize: "clamp(14px, 2.5vw, 16px)"
+    lineHeight: "1.7"
   },
 
-contactCard: {
-  maxWidth: "300px",   // 🔥 main fix
-  width: "100%",
-  margin: "20px auto",
-  background: "#fff",
-  padding: "18px",
-  borderRadius: "12px",
-  boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-  textAlign: "left"
-},
+  /* CONTACT */
+  contactCard: {
+    maxWidth: "420px",
+    margin: "auto",
+    padding: "25px",
+    borderRadius: "16px",
+    background: "#fff",
+    boxShadow: "0 8px 25px rgba(0,0,0,0.08)"
+  },
+
   input: {
-  width: "90%",
-  padding: "12px",
-  marginTop: "12px",
-  borderRadius: "6px",
-  border: "1px solid #ccc",
-  fontSize: "14px"
-},
+    width: "100%",
+    marginTop: "12px",
+    padding: "12px",
+    borderRadius: "8px",
+    border: "1px solid #ddd"
+  },
 
-textarea: {
-  width: "90%",
-  padding: "12px",
-  marginTop: "12px",
-  borderRadius: "6px",
-  border: "1px solid #ccc",
-  minHeight: "120px",
-  fontSize: "14px"
-},
+  textarea: {
+    width: "100%",
+    marginTop: "12px",
+    padding: "12px",
+    borderRadius: "8px",
+    border: "1px solid #ddd"
+  },
 
- button: {
-  marginTop: "15px",
-  padding: "14px",
-  width: "100%",
-  background: "#0a2540",
-  color: "#fff",
-  border: "none",
-  borderRadius: "8px",
-  fontSize: "16px",
-  fontWeight: "500"
-}
+  button: {
+    marginTop: "15px",
+    padding: "12px",
+    width: "100%",
+    background: "#0072ff",
+    color: "#fff",
+    border: "none",
+    borderRadius: "8px",
+    cursor: "pointer",
+    fontWeight: "600"
+  },
+
+  /* TEXT */
+  title: {
+    marginBottom: "10px",
+    fontSize: "18px",
+    fontWeight: "600"
+  },
+
+  text: {
+    marginBottom: "8px",
+    color: "#555"
+  }
 };
 
 export default Home;

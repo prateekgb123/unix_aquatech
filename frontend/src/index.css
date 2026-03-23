@@ -1,39 +1,48 @@
-/* SMOOTH SCROLL */
+/* 🔥 SMOOTH SCROLL */
 html {
   scroll-behavior: smooth;
 }
 
-/* GLOBAL RESET */
-body {
+/* 🔥 GLOBAL RESET */
+* {
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
-  font-family: Arial, sans-serif;
+  box-sizing: border-box;
 }
 
-/* 🔥 BETTER RESPONSIVE TYPOGRAPHY */
+body {
+  overflow-x: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f5f7fa;
+  color: #333;
+}
+
+/* 🔥 TYPOGRAPHY */
 h1 {
-  font-size: clamp(24px, 5vw, 42px);
+  font-size: clamp(26px, 5vw, 48px);
+  font-weight: 700;
 }
 
 h2 {
-  font-size: clamp(20px, 4vw, 28px);
+  font-size: clamp(22px, 4vw, 32px);
+  font-weight: 600;
 }
 
 p {
-  font-size: clamp(14px, 2.5vw, 16px);
+  font-size: clamp(14px, 2.5vw, 17px);
+  line-height: 1.6;
 }
 
-/* ANIMATION */
+/* 🔥 ANIMATIONS */
 .fade {
   opacity: 0;
-  animation: fadeIn 1s ease forwards;
+  animation: fadeUp 1s ease forwards;
 }
 
-@keyframes fadeIn {
+@keyframes fadeUp {
   from {
     opacity: 0;
-    transform: translateY(25px);
+    transform: translateY(40px);
   }
   to {
     opacity: 1;
@@ -41,47 +50,108 @@ p {
   }
 }
 
-/* CARD */
-.card {
-  background: white;
-  padding: clamp(15px, 3vw, 25px);
-  border-radius: 10px;
-  text-align: center;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+@keyframes zoomIn {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
-/* IMAGE */
+/* 🔥 CARD (UPGRADED) */
+.card {
+  background: #fff;
+  padding: clamp(18px, 3vw, 28px);
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+}
+
+/* ✨ HOVER EFFECT */
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+}
+
+/* 🔥 IMAGE */
 .imgHover {
   width: 100%;
-  height: clamp(180px, 30vw, 220px);
+  height: clamp(180px, 30vw, 240px);
   object-fit: cover;
-  border-radius: 10px;
-  transition: 0.3s;
+  border-radius: 12px;
+  transition: 0.4s ease;
 }
 
+/* ✨ IMAGE HOVER */
 .imgHover:hover {
-  transform: scale(1.05);
+  transform: scale(1.08);
 }
 
-/* 🔥 INPUT FIX FOR MOBILE */
-input, textarea {
-  font-size: 16px; /* prevents zoom issue on iPhone */
-}
-
-/* 🔥 BUTTON IMPROVEMENT */
+/* 🔥 BUTTON (PREMIUM) */
 button {
   cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  outline: none;
+}
+
+/* ✨ BUTTON HOVER */
+button:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 25px rgba(0,114,255,0.4);
+}
+
+/* 🔥 INPUT FIX */
+input, textarea {
+  font-size: 16px; /* prevent zoom on iPhone */
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 12px;
   transition: 0.3s;
 }
 
-button:hover {
-  opacity: 0.9;
+/* ✨ INPUT FOCUS */
+input:focus, textarea:focus {
+  border-color: #0072ff;
+  box-shadow: 0 0 0 2px rgba(0,114,255,0.2);
+  outline: none;
 }
 
-/* 🔥 HAMBURGER MENU FIX */
+/* 🔥 GLASS EFFECT (OPTIONAL USE) */
+.glass {
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(12px);
+  border-radius: 15px;
+}
+
+/* 🔥 NAVBAR MOBILE */
 @media (max-width: 768px) {
+  nav {
+    padding: 12px;
+  }
+
   nav div span {
     display: block;
     padding: 10px 0;
+  }
+}
+
+/* 🔥 EXTRA SMALL DEVICES */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 24px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  p {
+    font-size: 14px;
   }
 }

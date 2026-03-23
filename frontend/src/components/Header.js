@@ -18,9 +18,13 @@ function Header() {
     const el = document.getElementById(id);
     if (!el) return;
 
-    const top = el.offsetTop - 70;
+    const yOffset = -80; // adjust for navbar height
+    const y =
+      el.getBoundingClientRect().top +
+      window.pageYOffset +
+      yOffset;
 
-    window.scrollTo({ top, behavior: "smooth" });
+    window.scrollTo({ top: y, behavior: "smooth" });
     setOpen(false);
   };
 
@@ -29,22 +33,23 @@ function Header() {
       <div style={styles.container}>
 
         {/* LEFT */}
-        <div style={styles.left}>
+        <div style={styles.left} onClick={() => scrollTo("home")}>
           <img src={logo} alt="logo" style={styles.logoImg} />
           <h2 style={styles.logoText}>Unix Aquatech</h2>
         </div>
 
-        {/* RIGHT */}
+        {/* DESKTOP MENU */}
         {!isMobile && (
           <div style={styles.menu}>
             <span onClick={() => scrollTo("home")}>Home</span>
             <span onClick={() => scrollTo("about")}>About</span>
+            <span onClick={() => scrollTo("services")}>Services</span>
             <span onClick={() => scrollTo("gallery")}>Gallery</span>
             <span onClick={() => scrollTo("contact")}>Contact</span>
           </div>
         )}
 
-        {/* MOBILE */}
+        {/* MOBILE ICON */}
         {isMobile && (
           <div style={styles.hamburger} onClick={() => setOpen(true)}>
             <div style={styles.bar}></div>
@@ -58,7 +63,7 @@ function Header() {
           <div style={styles.mobileMenu}>
             <div style={styles.close} onClick={() => setOpen(false)}>✕</div>
 
-            {["home", "about", "gallery", "contact"].map((item) => (
+            {["home", "about", "services", "gallery", "contact"].map((item) => (
               <span
                 key={item}
                 style={styles.mobileLink}
