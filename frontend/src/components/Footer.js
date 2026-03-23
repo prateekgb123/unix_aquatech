@@ -1,8 +1,8 @@
 function Footer() {
   return (
-    <div style={styles.footer}>
-      <p>© 2026 Unix Aquatech Services</p>
-    </div>
+    <footer style={styles.footer}>
+      © 2026 Unix Aquatech Services
+    </footer>
   );
 }
 
@@ -10,9 +10,8 @@ const styles = {
   footer: {
     background: "#0a2540",
     color: "#fff",
-    padding: "20px",
     textAlign: "center",
-    marginTop: "40px"
+    padding: "15px"
   }
 };
 

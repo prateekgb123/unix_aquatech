@@ -1,23 +1,26 @@
-import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 
 function Header() {
+  const scrollTo = (id) => {
+    document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <nav style={styles.nav}>
       <div style={styles.container}>
 
-        {/* LEFT: LOGO + TITLE */}
+        {/* LEFT */}
         <div style={styles.left}>
-          <img src={logo} alt="Unix Aquatech Logo" style={styles.logoImg} />
+          <img src={logo} alt="logo" style={styles.logoImg} />
           <h2 style={styles.logoText}>Unix Aquatech</h2>
         </div>
 
-        {/* RIGHT: MENU */}
+        {/* RIGHT */}
         <div style={styles.menu}>
-          <Link to="/" style={styles.link}>Home</Link>
-          <Link to="/about" style={styles.link}>About</Link>
-          <Link to="/gallery" style={styles.link}>Gallery</Link>
-          <Link to="/contact" style={styles.link}>Contact</Link>
+          <span onClick={() => scrollTo("home")} style={styles.link}>Home</span>
+          <span onClick={() => scrollTo("about")} style={styles.link}>About</span>
+          <span onClick={() => scrollTo("gallery")} style={styles.link}>Gallery</span>
+          <span onClick={() => scrollTo("contact")} style={styles.link}>Contact</span>
         </div>
 
       </div>
@@ -36,14 +39,14 @@ const styles = {
 
   container: {
     maxWidth: "1200px",
-    margin: "0 auto",
+    margin: "auto",
     padding: "12px 20px",
     display: "flex",
     justifyContent: "space-between",
-    alignItems: "center"
+    alignItems: "center",
+    flexWrap: "wrap"
   },
 
-  /* LEFT SIDE */
   left: {
     display: "flex",
     alignItems: "center",
@@ -51,33 +54,28 @@ const styles = {
   },
 
   logoImg: {
-    width: "30px",
-    height: "30px",
-    objectFit: "contain",
+    width: "40px",
+    height: "40px",
     background: "#fff",
-    borderRadius: "6px",
-    padding: "5px"
+    padding: "5px",
+    borderRadius: "6px"
   },
 
   logoText: {
     color: "#fff",
-    fontSize: "20px",
-    fontWeight: "600",
-    margin: 0
+    margin: 0,
+    fontSize: "20px"
   },
 
-  /* RIGHT SIDE */
   menu: {
     display: "flex",
-    alignItems: "center"
+    gap: "20px",
+    flexWrap: "wrap"
   },
 
   link: {
-    marginLeft: "25px",
     color: "#fff",
-    textDecoration: "none",
-    fontSize: "15px",
-    transition: "0.3s"
+    cursor: "pointer"
   }
 };
 
