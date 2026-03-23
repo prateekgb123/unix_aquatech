@@ -236,7 +236,7 @@ const styles = {
   },
 
 contactCard: {
-  maxWidth: "380px",   // 🔥 main fix
+  maxWidth: "350px",   // 🔥 main fix
   width: "100%",
   margin: "20px auto",
   background: "#fff",
