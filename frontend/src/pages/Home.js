@@ -235,15 +235,15 @@ const styles = {
     fontSize: "clamp(14px, 2.5vw, 16px)"
   },
 
- contactCard: {
+contactCard: {
   maxWidth: "500px",
-  width: "100%",
-  margin: "auto",
+  width: "90%",          // ✅ reduce width on mobile
+  margin: "20px auto",   // ✅ adds spacing around
   background: "#fff",
   padding: "20px",
   borderRadius: "12px",
   boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-  textAlign: "left"   // 🔥 IMPORTANT FIX
+  textAlign: "left"
 },
 
   input: {
