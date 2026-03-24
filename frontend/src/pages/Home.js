@@ -8,6 +8,7 @@ import chemical from "../assets/chemical.jpg";
 import consulting from "../assets/consulting.jpg";
 import stp from "../assets/stp.jpg";
 import filtration from "../assets/filtration.jpg";
+
 function Home() {
   const services = [
     { name: "ETP", img: etp },
@@ -21,18 +22,22 @@ function Home() {
   const [projects, setProjects] = useState([]);
   const [current, setCurrent] = useState(0);
 
-  const heroImages = [
-    "https://res.cloudinary.com/demo/image/upload/sample.jpg",
-    "https://res.cloudinary.com/demo/image/upload/balloons.jpg",
-    "https://res.cloudinary.com/demo/image/upload/beach.jpg",
-  ];
+  // 🔥 FILTER ONLY IMAGES FROM CLOUDINARY API
+const heroImages = projects
+  .filter(p => p.type === "image")
+  .map(p =>
+    p.url.replace("/upload/", "/upload/w_1000,h_500,c_fill/")
+  );
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % heroImages.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, []);
+  if (heroImages.length === 0) return;
+
+  const interval = setInterval(() => {
+    setCurrent((prev) => (prev + 1) % heroImages.length);
+  }, 4000);
+
+  return () => clearInterval(interval);
+}, [heroImages]);
 
   useEffect(() => {
     axios
@@ -56,86 +61,86 @@ function Home() {
       <Header />
 
       {/* HERO */}
-      <section id="home">
-        <div>
-          <h1>
+      <section id="home" style={styles.hero}>
+        <div style={styles.heroLeft}>
+          <h1 style={styles.heroTitle}>
             Transforming Water Into{" "}
-            <span>Sustainable Solutions</span>
+            <span style={styles.highlight}>Sustainable Solutions</span>
           </h1>
 
-          <p>
+          <p style={styles.heroSub}>
             Advanced treatment systems for industries, ensuring purity,
             efficiency & environmental safety.
           </p>
 
-          <button onClick={scrollToServices}>
+          <button style={styles.cta} onClick={scrollToServices}>
             Explore Services →
           </button>
         </div>
 
-        <div>
-          <img src={heroImages[current]} alt="hero" />
+        <div style={styles.heroRight}>
+          <img
+  src={
+    heroImages[current] ||
+    "https://via.placeholder.com/800x500?text=Loading..."
+  }
+  alt="hero"
+  style={styles.heroImage}
+/>
         </div>
       </section>
 
       {/* ABOUT */}
-      <section id="about">
-        <div>
+      <section id="about" style={styles.section}>
+        <div style={styles.container}>
+          <div style={styles.cardGlass}>
+            <h1 style={styles.heading}>Unix Aquatech Services</h1>
 
-          {/* TOP CARD */}
-          <div>
-            <h1>Unix Aquatech Services</h1>
-
-            <p>
-              Unix Aquatech Services is a Bangalore-based water treatment
-              company specializing in advanced industrial and commercial
-              solutions, offering expertise in designing and implementing
-              ETP, STP, filtration, and ozonation systems that ensure
-              efficiency, reliability, and long-term performance while
-              delivering eco-friendly, sustainable, and cost-effective
-              solutions tailored to modern environmental needs.
+            <p style={styles.infoText}>
+              Unix Aquatech Services is a Bangalore-based water treatment and environmental solutions company dedicated to delivering innovative, efficient, and sustainable water management systems. With a strong foundation in engineering excellence and industry expertise, we specialize in designing, developing, and implementing advanced treatment technologies for industrial, commercial, and institutional applications. Our approach combines modern technology with practical field experience to provide customized solutions that address complex water challenges. From wastewater treatment to purification and reuse systems, we focus on delivering high-performance solutions that ensure regulatory compliance, operational efficiency, and long-term reliability. At Unix Aquatech Services, we believe in creating environmentally responsible solutions that not only solve current water issues but also contribute to a sustainable future. Our commitment to quality, innovation, and customer satisfaction drives us to continuously improve and adapt to evolving industry needs.
             </p>
           </div>
 
           <div style={{ height: "40px" }} />
 
-          {/* GRID */}
-          <div>
-            <div>
-              <h2>Who We Are</h2>
-              <p>
-                A team of experienced engineers focused on solving
-                water treatment challenges using modern technology.
+          <div style={styles.gridTwo}>
+            <div style={styles.infoCard}>
+              <h2 style={styles.infoHeading}>Who We Are</h2>
+              <p style={styles.infoText}>
+                Unix Aquatech Services is a team of dedicated engineers and water treatment specialists committed to delivering innovative and sustainable solutions for modern water challenges. Based in Bangalore, we bring together technical expertise, industry experience, and a passion for environmental responsibility to design efficient and reliable treatment systems for industries and communities.
               </p>
             </div>
 
-            <div>
-              <h2>What We Offer</h2>
-              <ul>
+            <div style={styles.infoCard}>
+              <h2 style={styles.infoHeading}>What We Offer</h2>
+              <ul style={styles.list}>
                 <li>Effluent Treatment Plants (ETP)</li>
                 <li>Water Filtration Systems</li>
                 <li>Ozonation Systems</li>
                 <li>Chemical Treatment Solutions</li>
+                <li>Consulting & Custom Solutions</li>
+                <li>STP & Sewage Treatment Solutions</li>
+                <li>Maintenance & Support Services</li>
+                <li>Environmental Compliance Assistance</li>
               </ul>
             </div>
           </div>
-
         </div>
       </section>
 
       {/* SERVICES */}
-      <section id="services">
-        <div>
-          <h2>Our Services</h2>
+      <section id="services" style={styles.sectionLight}>
+        <div style={styles.container}>
+          <h2 style={styles.heading}>Our Services</h2>
 
-          <div>
+          <div style={styles.grid}>
             {services.map((s, i) => (
-              <div key={i}>
-                <div>
-                  <img src={s.img} alt={s.name} />
+              <div key={i} style={styles.serviceCard}>
+                <div style={styles.mediaWrapper}>
+                  <img src={s.img} alt={s.name} style={styles.media} />
                 </div>
 
-                <div>
+                <div style={{ padding: "15px" }}>
                   <h3>{s.name}</h3>
                   <p>Reliable solutions</p>
                 </div>
@@ -146,18 +151,18 @@ function Home() {
       </section>
 
       {/* GALLERY */}
-      <section id="gallery">
-        <div>
-          <h2>Our Work</h2>
+      <section id="gallery" style={styles.section}>
+        <div style={styles.container}>
+          <h2 style={styles.heading}>Our Work</h2>
 
-          <div>
+          <div style={styles.grid}>
             {projects.map((p, i) => (
-              <div key={i}>
-                <div>
+              <div key={i} style={styles.card}>
+                <div style={styles.mediaWrapper}>
                   {p.type === "image" ? (
-                    <img src={p.url} alt="" />
+                    <img src={p.url} alt="" style={styles.media} />
                   ) : (
-                    <video controls>
+                    <video controls style={styles.media}>
                       <source src={p.url} />
                     </video>
                   )}
@@ -169,15 +174,15 @@ function Home() {
       </section>
 
       {/* CONTACT */}
-      <section id="contact">
-        <div>
-          <h2>Contact Us</h2>
+      <section id="contact" style={styles.section}>
+        <div style={styles.container}>
+          <h2 style={styles.heading}>Contact Us</h2>
 
-          <div>
-            <input placeholder="Name" />
-            <input placeholder="Email" />
-            <textarea placeholder="Message" />
-            <button>Send</button>
+          <div style={styles.contactCard}>
+            <input placeholder="Name" style={styles.input} />
+            <input placeholder="Email" style={styles.input} />
+            <textarea placeholder="Message" style={styles.textarea} />
+            <button style={styles.button}>Send</button>
           </div>
         </div>
       </section>
@@ -187,283 +192,157 @@ function Home() {
   );
 }
 
-
-/* 🔥 FINAL STYLES */
-
+/* ✅ CLEAN FIXED STYLES (NO DUPLICATES) */
 const styles = {
-heroCard: {
-  width: "100%",
-  maxWidth: "800px", // 🔥 increase size
-  margin: "auto",
-  padding: "60px 50px",
-  borderRadius: "24px",
-  textAlign: "center",
-  background: "#ffffff",
-  boxShadow: "0 20px 60px rgba(0,0,0,0.1)"
-},
-
-heroTitle: {
-  fontSize: "44px", // 🔥 bigger
-  fontWeight: "800",
-  marginBottom: "25px",
-  color: "#111827"
-},
-
-heroText: {
-  fontSize: "19px", // 🔥 large readable paragraph
-  lineHeight: "2",  // 🔥 airy spacing
-  color: "#4b5563",
-  maxWidth: "800px",
-  margin: "auto"
-},
-centerWrapper: {
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  flexDirection: "column"
-},
-  /* 🔥 HERO */
-hero: {
-  display: "flex",
-  flexWrap: "wrap",
-  alignItems: "center",
-  justifyContent: "space-between",
-  padding: "100px 20px",
-  background: "linear-gradient(135deg,#0f2027,#203a43,#2c5364)",
-  color: "#fff",
-  gap: "40px"
-},
-
-  heroLeft: {
-    flex: 1,
-    minWidth: "280px",
-    maxWidth: "550px"
+  hero: {
+    display: "flex",
+    flexWrap: "wrap",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: "80px 20px",
+    background: "linear-gradient(135deg,#0f2027,#203a43,#2c5364)",
+    color: "#fff",
+    gap: "40px",
   },
 
+  heroLeft: { flex: 1, minWidth: "280px", maxWidth: "550px" },
   heroRight: {
-    flex: 1,
-    textAlign: "center",
-    minWidth: "280px"
-  },
+  flex: 1,
+  textAlign: "center",
+  minWidth: "280px",
+  display: "flex",
+  justifyContent: "center"
+},
 
   heroImage: {
-    width: "100%",
-    maxWidth: "380px",
-    borderRadius: "16px",
-    boxShadow: "0 10px 30px rgba(0,0,0,0.3)"
-  },
+  width: "100%",
+  height: "400px",        // ✅ FIXED HEIGHT (important)
+  objectFit: "cover",     // ✅ crop instead of stretch
+  borderRadius: "20px",
+  display: "block"
+},
 
-  heroTitle: {
-    fontSize: "42px",
-    fontWeight: "800",
-    lineHeight: "1.3"
-  },
+  heroTitle: { fontSize: "42px", fontWeight: "800" },
 
-  heroSub: {
-    marginTop: "15px",
-    fontSize: "16px",
-    lineHeight: "1.6",
-    color: "#d1d5db"
-  },
+  heroSub: { marginTop: "15px", color: "#d1d5db" },
 
   cta: {
-    marginTop: "25px",
+    marginTop: "20px",
     padding: "12px 28px",
-    background: "linear-gradient(90deg,#0072ff,#00c6ff)",
+    background: "#0072ff",
     color: "#fff",
     border: "none",
     borderRadius: "8px",
     cursor: "pointer",
-    fontWeight: "600",
-    transition: "0.3s"
   },
 
-  /* SECTION */
-  section: {
-    padding: "70px 20px"
-  },
+  section: { padding: "70px 20px" },
+  sectionLight: { padding: "70px 20px", background: "#f5f7fa" },
 
-  sectionLight: {
-    padding: "70px 20px",
-    background: "#f5f7fa"
-  },
+  container: { maxWidth: "1100px", margin: "auto" },
 
-  container: {
-    maxWidth: "1100px",
-    margin: "auto"
-  },
+  heading: { textAlign: "center", marginBottom: "25px" },
 
-  heading: {
-    marginBottom: "25px",
-    fontSize: "34px",
-    fontWeight: "700",
-    textAlign: "center"
-  },
-
-  /* GRID */
   grid: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))",
-    gap: "25px"
+    gap: "25px",
   },
 
   gridTwo: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit,minmax(300px,1fr))",
     gap: "25px",
-    marginTop: "30px"
   },
 
-  /* CARDS */
-  cardGlass: {
-  maxWidth: "750px",
-  margin: "auto",
-  padding: "40px 30px",
-  borderRadius: "20px",
-  textAlign: "center",
-  background: "rgba(255,255,255,0.8)",
-  backdropFilter: "blur(10px)",
-  boxShadow: "0 15px 40px rgba(0,0,0,0.1)"
-},
-
-gridTwo: {
-  display: "grid",
-  gridTemplateColumns: "repeat(auto-fit,minmax(300px,1fr))",
-  gap: "30px",
-  alignItems: "stretch"
-},
-
-infoCard: {
-  background: "#fff",
-  padding: "25px",
-  borderRadius: "16px",
-  boxShadow: "0 10px 25px rgba(0,0,0,0.08)",
-  transition: "0.3s"
-},
-
-infoHeading: {
-  marginBottom: "12px",
-  fontSize: "20px",
-  fontWeight: "600",
-  color: "#111827"
-},
-
-infoText: {
-  lineHeight: "1.7",
-  color: "#555"
-},
-
-list: {
-  paddingLeft: "20px",
-  lineHeight: "1.8",
-  color: "#555"
-},
-
-highlight: {
-  color: "#0072ff",
-  fontWeight: "600"
-},
-  card: {
+  serviceCard: {
     background: "#fff",
     borderRadius: "16px",
-    padding: "15px",
-    boxShadow: "0 8px 25px rgba(0,0,0,0.08)"
+    overflow: "hidden",
   },
 
-serviceCard: {
-  background: "#fff",
-  borderRadius: "18px",
-  boxShadow: "0 8px 20px rgba(0,0,0,0.08)",
-  transition: "0.3s",
-  cursor: "pointer",
-  overflow: "hidden" // 🔥 fixes overflow
-},
+  mediaWrapper: { height: "180px", overflow: "hidden" },
 
-mediaWrapper: {
-  width: "100%",
-  height: "180px",
-  overflow: "hidden"
-},
+  media: { width: "100%", height: "100%", objectFit: "cover" },
 
-media: {
-  width: "100%",
-  height: "100%",
-  objectFit: "cover",
-  display: "block"
-},
-  /* INFO */
   infoCard: {
-    background: "#ffffff",
-    padding: "25px",
-    borderRadius: "16px",
-    boxShadow: "0 8px 25px rgba(0,0,0,0.08)"
-  },
-
-  infoHeading: {
-    marginBottom: "10px",
-    fontSize: "20px",
-    fontWeight: "600"
-  },
-
-  infoText: {
-    lineHeight: "1.7",
-    color: "#555"
-  },
-
-  list: {
-    paddingLeft: "20px",
-    lineHeight: "1.7"
-  },
-
-  /* CONTACT */
-  contactCard: {
-    maxWidth: "420px",
-    margin: "auto",
-    padding: "25px",
-    borderRadius: "16px",
     background: "#fff",
-    boxShadow: "0 8px 25px rgba(0,0,0,0.08)"
+    padding: "20px",
+    borderRadius: "12px",
   },
 
-  input: {
-    width: "100%",
-    marginTop: "12px",
-    padding: "12px",
-    borderRadius: "8px",
-    border: "1px solid #ddd"
-  },
+  infoHeading: { marginBottom: "10px" },
+
+  infoText: { color: "#555" },
+
+  list: { paddingLeft: "20px" },
+
+contactCard: {
+  maxWidth: "450px",
+  margin: "auto",
+  padding: "35px 30px",
+  borderRadius: "20px",
+  background: "rgba(255,255,255,0.8)",
+  backdropFilter: "blur(12px)",
+  boxShadow: "0 20px 50px rgba(0,0,0,0.1)",
+  border: "1px solid rgba(255,255,255,0.3)"
+},
+
+ input: {
+  width: "100%",
+  marginTop: "15px",
+  padding: "14px 16px",
+  borderRadius: "10px",
+  border: "1px solid #ddd",
+  fontSize: "15px",
+  outline: "none",
+  transition: "0.3s",
+  background: "#f9fafb"
+},
 
   textarea: {
-    width: "100%",
-    marginTop: "12px",
-    padding: "12px",
-    borderRadius: "8px",
-    border: "1px solid #ddd"
-  },
+  width: "100%",
+  marginTop: "15px",
+  padding: "14px 16px",
+  borderRadius: "10px",
+  border: "1px solid #ddd",
+  fontSize: "15px",
+  minHeight: "110px",
+  outline: "none",
+  transition: "0.3s",
+  background: "#f9fafb"
+},
+
 
   button: {
-    marginTop: "15px",
-    padding: "12px",
-    width: "100%",
-    background: "#0072ff",
-    color: "#fff",
-    border: "none",
-    borderRadius: "8px",
-    cursor: "pointer",
-    fontWeight: "600"
+  marginTop: "20px",
+  padding: "14px",
+  width: "100%",
+  background: "linear-gradient(90deg,#0072ff,#00c6ff)",
+  color: "#fff",
+  border: "none",
+  borderRadius: "10px",
+  cursor: "pointer",
+  fontWeight: "600",
+  fontSize: "16px",
+  transition: "0.3s",
+  boxShadow: "0 10px 25px rgba(0,114,255,0.3)"
+},
+
+  card: {
+    background: "#fff",
+    borderRadius: "12px",
+    overflow: "hidden",
   },
 
-  /* TEXT */
-  title: {
-    marginBottom: "10px",
-    fontSize: "18px",
-    fontWeight: "600"
+  cardGlass: {
+    padding: "30px",
+    borderRadius: "16px",
+    background: "#fff",
+    textAlign: "center",
   },
 
-  text: {
-    marginBottom: "8px",
-    color: "#555"
-  }
+  highlight: { color: "#00c6ff" },
 };
 
 export default Home;

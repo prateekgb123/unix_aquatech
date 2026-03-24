@@ -85,46 +85,61 @@ const styles = {
     position: "sticky",
     top: 0,
     width: "100%",
-    background: "#0a2540",
-    zIndex: 1000
+    background: "rgba(10, 37, 64, 0.85)",
+    backdropFilter: "blur(12px)",
+    zIndex: 1000,
+    borderBottom: "1px solid rgba(255,255,255,0.08)"
   },
 
   container: {
     maxWidth: "1200px",
     margin: "auto",
-    padding: "12px 20px",
+    padding: "14px 20px",
     display: "flex",
-    justifyContent: "space-between", // 🔥 FIX
+    justifyContent: "space-between",
     alignItems: "center"
   },
 
   left: {
     display: "flex",
     alignItems: "center",
-    gap: "10px"
+    gap: "10px",
+    cursor: "pointer"
   },
 
   logoImg: {
-    width: "40px",
-    height: "40px",
+    width: "42px",
+    height: "42px",
     background: "#fff",
-    padding: "5px",
-    borderRadius: "6px"
+    padding: "6px",
+    borderRadius: "10px",
+    boxShadow: "0 4px 10px rgba(0,0,0,0.2)"
   },
 
   logoText: {
     color: "#fff",
     margin: 0,
-    fontSize: "18px"
+    fontSize: "18px",
+    fontWeight: "600",
+    letterSpacing: "0.5px"
   },
 
+  /* 🔥 DESKTOP MENU */
   menu: {
     display: "flex",
-    gap: "25px",
-    color: "#fff",
-    cursor: "pointer"
+    gap: "28px",
+    color: "#e5e7eb",
+    cursor: "pointer",
+    fontSize: "15px",
+    fontWeight: "500"
   },
 
+  menuItem: {
+    position: "relative",
+    transition: "0.3s"
+  },
+
+  /* 🔥 HAMBURGER */
   hamburger: {
     display: "flex",
     flexDirection: "column",
@@ -135,36 +150,52 @@ const styles = {
   bar: {
     width: "25px",
     height: "3px",
-    background: "#fff"
+    background: "#fff",
+    borderRadius: "3px",
+    transition: "0.3s"
   },
 
+  /* 🔥 MOBILE MENU (PREMIUM FULLSCREEN) */
   mobileMenu: {
     position: "fixed",
     top: 0,
     left: 0,
     width: "100%",
     height: "100vh",
-    background: "#0a2540",
+    background: "linear-gradient(135deg,#0f2027,#203a43,#2c5364)",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    gap: "25px"
+    gap: "35px",
+    animation: "fadeIn 0.4s ease"
   },
 
   mobileLink: {
     color: "#fff",
-    fontSize: "24px"
+    fontSize: "28px",
+    fontWeight: "600",
+    letterSpacing: "1px",
+    cursor: "pointer",
+    transition: "0.3s",
+    padding: "10px 20px",
+    borderRadius: "8px"
   },
 
   close: {
     position: "absolute",
-    top: "20px",
+    top: "25px",
     right: "25px",
-    fontSize: "30px",
+    fontSize: "28px",
     color: "#fff",
-    cursor: "pointer"
+    cursor: "pointer",
+    background: "rgba(255,255,255,0.1)",
+    width: "40px",
+    height: "40px",
+    borderRadius: "50%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
   }
 };
-
 export default Header;
